@@ -102,18 +102,26 @@ const expensiveTacos = (tacoArr) => {
 }
 
 let expensiveTacoArr = expensiveTacos(tacos)
-console.log(expensiveTacoArr)
+// console.log(expensiveTacoArr)
 
 
 
 // return a new array with a 'about' key where it is a combo of
 // name price and about
+const newAboutKey = (tacoArr) => {
+  return tacoArr.map((tacoItem)=>{
+    const {id, name, price, about} = tacoItem
+    nameCap = name.split(" ").map((name)=>name.charAt(0).toUpperCase() + name.slice(1)).join(" ") 
+    aboutCap = about.split(" ").map((about)=>about.charAt(0).toUpperCase() + about. slice(1)).join(" ")
+    return{...tacoItem, about: `~${aboutCap}~ ${nameCap} Tacos only $${price}.00!`}
+  })
+}
+
+newAboutTacos = newAboutKey(tacos)
+// console.log(newAboutTacos)
 
 
-
-
-
-///CRUD
+////CRUD
 
 // don't change tacos array or change objects
 
@@ -122,12 +130,17 @@ console.log(expensiveTacoArr)
 
 
 // READ (array of obj to array of html) 
+const readTacos = (tacoArr) => {
+
+}
+
 
 // Update (update a taco) 
 
 // Remove (delete a taco) 
 
 // Create (add a taco) 
+
 
 
 
