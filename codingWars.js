@@ -24,7 +24,7 @@ const changeName = (tacoID, tacoOBJ) => {
 }
 
 let newName = changeName(3, taco2)
-// console.log(newName)
+console.log(newName)
 
 
 
@@ -41,7 +41,7 @@ const tacoHTML = (tacoOBJ) => {
 }
 
 let newTacoHTML = tacoHTML(taco)
-// console.log(newTacoHTML)
+console.log(newTacoHTML)
 
 
 
@@ -55,7 +55,7 @@ const tacoPrice = (tacoOBJ) => {
 }
 
 let formatPrice = tacoPrice(taco1)
-// console.log(formatPrice)
+console.log(formatPrice)
 
 
 //// create a new array where all of the prices is formatted with .00
@@ -66,7 +66,7 @@ const reformatPrice = (tacoArr) => {
 }
 
 let newTacoArr = reformatPrice(tacos)
-// console.log(newTacoArr)
+console.log(newTacoArr)
 
 
 
@@ -80,7 +80,7 @@ const logTacoArr = (tacoArr) => {
   })
 }
 
-// logTacoArr(tacos)
+logTacoArr(tacos)
 
 //// use the find method to return the object with id:1
 const getTaco = (tacoArr) => {
@@ -88,7 +88,7 @@ const getTaco = (tacoArr) => {
 }
 
 let foundTaco = getTaco(tacos)
-// console.log(foundTaco)
+console.log(foundTaco)
 
 
 
@@ -102,12 +102,12 @@ const expensiveTacos = (tacoArr) => {
 }
 
 let expensiveTacoArr = expensiveTacos(tacos)
-// console.log(expensiveTacoArr)
+console.log(expensiveTacoArr)
 
 
 
-// return a new array with a 'about' key where it is a combo of
-// name price and about
+//// return a new array with a 'about' key where it is a combo of
+//// name price and about
 const newAboutKey = (tacoArr) => {
   return tacoArr.map((tacoItem)=>{
     const {id, name, price, about} = tacoItem
@@ -118,33 +118,87 @@ const newAboutKey = (tacoArr) => {
 }
 
 newAboutTacos = newAboutKey(tacos)
-// console.log(newAboutTacos)
+console.log(newAboutTacos)
 
 
 ////CRUD
 
-// don't change tacos array or change objects
+//// don't change tacos array or change objects
 
-// can hard code data (Don't need to get it from the users)
+//// can hard code data (Don't need to get it from the users)
 
 
 
-// READ (array of obj to array of html) 
+//// READ (array of obj to array of html) 
 const readTacos = (tacoArr) => {
+  return tacoArr.map((tacoItem)=>{
+    const {id, name, price, about} = tacoItem
+    nameCap = name.split(" ").map((name)=>name.charAt(0).toUpperCase() + name.slice(1)).join(" ")
+    aboutCap = about.split(" ").map((about)=>about.charAt(0).toUpperCase() + about.slice(1)).join(" ")
 
+    return(`
+      <div>
+        <h1>${id}) ${nameCap}</h1>
+        <p>Price: $${price}.00</p>
+        <p>Reviews: ${aboutCap}!</p>
+      </div>
+    `)
+  })
 }
 
+let tacosHTML = readTacos(tacos)
+console.log(tacosHTML)
 
-// Update (update a taco) 
 
-// Remove (delete a taco) 
 
-// Create (add a taco) 
+//// Update (update a taco) 
+const updateTacoItem = (tacoItem, newName) => {
+  const {id, name, price, about} = tacoItem
 
+  return{...tacoItem, name: `${newName}`}
+}
+
+let updatedTaco = updateTacoItem(taco1, "beef")
+console.log(updatedTaco)
+
+
+
+//// Remove (delete a taco) 
+const deleteTacoItem = (tacoArr) => {
+  return tacoArr.filter((tacoItem)=>
+    tacoItem.name !== "fish"
+  )
+}
+
+let deletedTacoArr = deleteTacoItem(tacos)
+console.log(deletedTacoArr)
+
+
+
+
+//// Create (add a taco) 
+const addNewTaco = (tacoArr) => {
+  tacoArr.push({id: 4, name: "pork", price: 25, about: "Delicious"})
+  return tacoArr
+}
+
+let addNewTacoArr = addNewTaco(tacos)
+console.log(addNewTacoArr)
 
 
 
 // bonus use reduce to return the sum of prices in tacos array
+const tacoArrTotalPrice = (tacoArr) => {
+  let tacoPriceArr = []
+  tacoArr.forEach((tacoItem)=>
+    tacoPriceArr.push(tacoItem.price)
+  )
+  let totalPrice = tacoPriceArr.reduce((sum, cv) => sum + cv)
+  return(`Total Price: $${totalPrice}.00`)
+}
+
+let tacoPrices = tacoArrTotalPrice(tacos)
+console.log(tacoPrices)
 
 // bonus do in rails
 
